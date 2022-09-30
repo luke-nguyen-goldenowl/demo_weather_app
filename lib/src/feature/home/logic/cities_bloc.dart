@@ -31,7 +31,7 @@ class CitiesBloc extends Cubit<CitiesState> {
     );
     var data = json.decode(response.body);
     if ((data["error"] ?? false) == true) {
-      print(data["reason"]);
+      // print(data["reason"]);
     } else {
       List<NCity> cities = List.from(
         (data["results"] ?? []).map((e) => NCity.fromMap(e)),
@@ -56,7 +56,7 @@ class CitiesBloc extends Cubit<CitiesState> {
     UserPrefs().saveCities(cities);
   }
 
-  void onShowWeatherDetail() {
-    XCoordinator.showWeatherDetailView();
+  void onShowWeatherDetail(NCity city) {
+    XCoordinator.showWeatherDetailView(city);
   }
 }
