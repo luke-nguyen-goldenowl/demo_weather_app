@@ -15,11 +15,12 @@ class HomeView extends StatelessWidget {
             var bloc = context.read<CitiesBloc>();
             return Scaffold(
                 appBar: AppBar(
+                    automaticallyImplyLeading: false,
                     backgroundColor: const Color(0xFFEEF2DD),
                     title: const Text("Weather App",
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 16,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ))),
                 body: Column(
@@ -73,7 +74,8 @@ class HomeView extends StatelessWidget {
                                     children: [
                                       Expanded(
                                           child: GestureDetector(
-                                        onTap: () => bloc.onShowWeatherDetail(),
+                                        onTap: () =>
+                                            bloc.onShowWeatherDetail(item),
                                         child: Text(
                                             "${item.name}, ${item.timezone}, ${item.country}",
                                             style: const TextStyle(
@@ -114,7 +116,7 @@ class HomeView extends StatelessWidget {
                           children: [
                             Expanded(
                                 child: GestureDetector(
-                              onTap: () => bloc.onShowWeatherDetail(),
+                              onTap: () => bloc.onShowWeatherDetail(item),
                               child: Text(
                                   "${item.name}, ${item.timezone}, ${item.country}",
                                   style: const TextStyle(

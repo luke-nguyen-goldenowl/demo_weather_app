@@ -1,3 +1,4 @@
+import 'package:demo_weather_app/src/network/model/city.dart';
 import 'package:demo_weather_app/src/router/router.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,10 @@ class XCoordinator {
     return navigator.pushNamed(routeName, arguments: arguments);
   }
 
-  static Future showWeatherDetailView() {
-    return pushNamed(RouterName.weatherDetail);
+  static Future showWeatherDetailView(NCity city) {
+    return pushNamed(
+      RouterName.weatherDetail,
+      arguments: city,
+    );
   }
 }
