@@ -12,7 +12,7 @@ class AppRoute {
     // final arg = settings.arguments;
     switch (settings.name) {
       case RouterName.home:
-        return MaterialPageRoute(builder: (_) => HomeView());
+        return MaterialPageRoute(builder: (_) => const HomeView());
 
       default:
         return MaterialPageRoute(
