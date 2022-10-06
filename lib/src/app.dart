@@ -1,5 +1,6 @@
 import 'package:demo_weather_app/src/router/coordinator.dart';
 import 'package:demo_weather_app/src/router/router.dart';
+import 'package:demo_weather_app/src/theme/themes.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [
         Locale('en', ''),
       ],
+      theme: XTheme.light(),
       initialRoute: RouterName.home,
       onGenerateRoute: AppRoute.onGenerateRoute,
     );

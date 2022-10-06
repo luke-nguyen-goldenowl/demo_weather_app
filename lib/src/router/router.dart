@@ -1,4 +1,3 @@
-import 'package:demo_weather_app/src/feature/common/view/not_found_view.dart';
 import 'package:demo_weather_app/src/feature/home/view/home_view.dart';
 import 'package:demo_weather_app/src/feature/weather_detail/view/weather_detail_view.dart';
 import 'package:demo_weather_app/src/network/model/city.dart';
@@ -21,7 +20,7 @@ class AppRoute {
 
       default:
         return MaterialPageRoute(
-          builder: (_) => const NotFoundView(),
+          builder: (_) => const Text("Not Found"),
         );
     }
   }

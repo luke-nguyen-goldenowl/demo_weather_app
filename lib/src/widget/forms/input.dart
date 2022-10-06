@@ -24,7 +24,6 @@ class XInput extends StatefulWidget {
   final String value;
   final TextInputType? keyboardType;
   final bool obscureText;
-
   final ValueChanged<String>? onChanged;
   final InputDecoration? decoration;
   final int? maxLength;
