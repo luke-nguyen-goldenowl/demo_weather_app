@@ -21,10 +21,29 @@ class HomeView extends StatelessWidget {
                       "Weather App",
                     )),
                 body: Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        const XCustomTitle(
+                          padding: EdgeInsets.symmetric(vertical: 20),
+                          title: "Tracking Cities",
+                        ),
+                        Expanded(
+                            flex: 2,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: state.availableCities.length,
+                              itemBuilder: (context, index) {
+                                var item = state.availableCities[index];
+                                return _cityItem(
+                                  title:
+                                      "${item.name}, ${item.timezone}, ${item.country}",
+                                  onTap: () => bloc.onShowWeatherDetail(item),
+                                  onRemove: () => bloc.onRemoveCity(item),
+                                );
+                              },
+                            )),
                         XSearchField(
                           value: state.searchText,
                           onChanged: (value) => bloc.onChangedText(value),
@@ -32,61 +51,44 @@ class HomeView extends StatelessWidget {
                           hinText:
                               "search which city you want to know its weather",
                         ),
-                        // Expanded(
-                        //     child: state.cities.isEmpty
-                        //         ? Center(
-                        //             child: Text("There are no cities",
-                        //                 style: TextStyle(
-                        //                   color: Colors.grey.withOpacity(0.6),
-                        //                   fontSize: 20,
-                        //                 )))
-                        //         : ListView.builder(
-                        //             padding: const EdgeInsets.all(20),
-                        //             shrinkWrap: true,
-                        //             itemCount: state.cities.length,
-                        //             itemBuilder: (context, index) {
-                        //               var item = state.cities[index];
-                        //               return Row(
-                        //                 children: [
-                        //                   Expanded(
-                        //                       child: GestureDetector(
-                        //                     onTap: () =>
-                        //                         bloc.onShowWeatherDetail(item),
-                        //                     child: Text(
-                        //                         "${item.name}, ${item.timezone}, ${item.country}",
-                        //                         style: const TextStyle(
-                        //                           color: Colors.black,
-                        //                           fontSize: 18,
-                        //                         )),
-                        //                   )),
-                        //                   IconButton(
-                        //                       onPressed: () =>
-                        //                           bloc.onAddCity(item),
-                        //                       icon: const Icon(
-                        //                         Icons.add,
-                        //                       )),
-                        //                 ],
-                        //               );
-                        //             },
-                        //           )),
-                        const XCustomTitle(
-                          padding: EdgeInsets.symmetric(vertical: 20),
-                          title: "Tracking Cities",
-                        ),
                         Expanded(
-                            child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: state.availableCities.length,
-                          itemBuilder: (context, index) {
-                            var item = state.availableCities[index];
-                            return _cityItem(
-                              title:
-                                  "${item.name}, ${item.timezone}, ${item.country}",
-                              onTap: () => bloc.onShowWeatherDetail(item),
-                              onRemove: () => bloc.onRemoveCity(item),
-                            );
-                          },
-                        )),
+                            flex: 1,
+                            child: state.cities.isEmpty
+                                ? Center(
+                                    child: Text("There are no cities",
+                                        style: TextStyle(
+                                          color: Colors.grey.withOpacity(0.6),
+                                          fontSize: 20,
+                                        )))
+                                : ListView.builder(
+                                    padding: const EdgeInsets.all(20),
+                                    shrinkWrap: true,
+                                    itemCount: state.cities.length,
+                                    itemBuilder: (context, index) {
+                                      var item = state.cities[index];
+                                      return Row(
+                                        children: [
+                                          Expanded(
+                                              child: GestureDetector(
+                                            onTap: () =>
+                                                bloc.onShowWeatherDetail(item),
+                                            child: Text(
+                                                "${item.name}, ${item.timezone}, ${item.country}",
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 18,
+                                                )),
+                                          )),
+                                          IconButton(
+                                              onPressed: () =>
+                                                  bloc.onAddCity(item),
+                                              icon: const Icon(
+                                                Icons.add,
+                                              )),
+                                        ],
+                                      );
+                                    },
+                                  )),
                       ],
                     )));
           },
