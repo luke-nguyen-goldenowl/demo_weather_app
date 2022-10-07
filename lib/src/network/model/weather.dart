@@ -39,32 +39,6 @@ class NWeather {
     );
   }
 
-  // factory NWeather.fromMap(Map map, {String? id}) {
-  //   return NWeather(
-  //     id: id ?? map["id"],
-  //     temperature2m: map["temperature2m"],
-  //     relativehumidity2m: map["relativehumidity2m"],
-  //     rain: map["rain"],
-  //     temperature2mMax: map["temperature2mMax"],
-  //     temperature2mMin: map["temperature2mMin"],
-  //     rainSum: map["rainSum"],
-  //     listDay: map["listDay"],
-  //   );
-  // }
-
-  // Map<String, dynamic> toMap() {
-  //   return {
-  //     "id": id,
-  //     "temperature2m": temperature2m,
-  //     "relativehumidity2m": relativehumidity2m,
-  //     "rain": rain,
-  //     "temperature2mMax": temperature2mMax,
-  //     "temperature2mMin": temperature2mMin,
-  //     "rainSum": rainSum,
-  //     "listDay": listDay,
-  //   };
-  // }
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;

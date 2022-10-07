@@ -38,25 +38,35 @@ class WeatherDetailView extends StatelessWidget {
                             color: Colors.black,
                           ))
                         : ListView(
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.symmetric(vertical: 20),
                             children: [
                               XCustomTitle(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10),
+                                padding: const EdgeInsets.all(20),
                                 title: "City: ${city.name}",
                                 color: Colors.lightBlue.shade100,
                               ),
-                              const XCustomTitle(title: "Current weather"),
+                              const XCustomTitle(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 5,
+                                  horizontal: 20,
+                                ),
+                                title: "Current weather",
+                              ),
                               _temperature2m(state.weather.temperature2m),
                               _relativehumidity2m(
                                   state.weather.relativehumidity2m),
                               _rain(state.weather.rain),
                               const XCustomTitle(
-                                padding: EdgeInsets.symmetric(vertical: 20),
+                                padding: EdgeInsets.only(
+                                  top: 30,
+                                  bottom: 10,
+                                  left: 20,
+                                  right: 20,
+                                ),
                                 title: "Weather for the next 7 days",
                               ),
                               SizedBox(
-                                  height: 270,
+                                  height: 250,
                                   child: PageView.builder(
                                     scrollDirection: Axis.horizontal,
                                     itemCount:
@@ -73,8 +83,7 @@ class WeatherDetailView extends StatelessWidget {
 
   Widget _dailyItem(NWeather weather, int index) {
     return Container(
-        margin: const EdgeInsets.all(5),
-        padding: const EdgeInsets.all(20),
+        margin: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             gradient: LinearGradient(
@@ -82,8 +91,8 @@ class WeatherDetailView extends StatelessWidget {
               end: Alignment.bottomCenter,
               stops: const [0.2, 0.8],
               colors: [
-                Colors.blue.shade700,
-                Colors.blue.shade200,
+                Colors.blue.shade700.withAlpha(100),
+                Colors.blue.shade200.withAlpha(100),
               ],
             )),
         child: Column(
@@ -112,7 +121,7 @@ class WeatherDetailView extends StatelessWidget {
   }) {
     return Container(
         padding: const EdgeInsets.all(10),
-        margin: const EdgeInsets.symmetric(vertical: 5),
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.pink.shade50,
