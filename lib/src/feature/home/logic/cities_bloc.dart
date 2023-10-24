@@ -23,9 +23,14 @@ class CitiesBloc extends Cubit<CitiesState> {
 
   void onChangedText(String value) {
     emit(state.copyWith(searchText: value));
+    _searchCities();
   }
 
-  void onSearchCities() async {
+  void _searchCities() async {
+    String _previousSearch = state.searchText.toString();
+    await Future.delayed(const Duration(milliseconds: 300));
+    if (_previousSearch != state.searchText) return;
+
     var response = await http.get(
       Uri.parse(apiSearchCity + state.searchText),
     );

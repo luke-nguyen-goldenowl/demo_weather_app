@@ -61,7 +61,7 @@ class WeatherDetailBloc extends Cubit<WeatherDetailState> {
 
   double? getHourlyData(String body, String param) {
     var hour = DateTime.now().hour;
-    return jsonDecode(body)["hourly"][param][hour];
+    return (jsonDecode(body)["hourly"][param][hour] as num?)?.toDouble();
   }
 
   List<String>? getTimeData(String body) {
@@ -88,5 +88,9 @@ class WeatherDetailBloc extends Cubit<WeatherDetailState> {
       city.timezone,
       param,
     )));
+  }
+
+  void onPageChanged(int value) {
+    emit(state.copyWith(currentPage: value));
   }
 }
