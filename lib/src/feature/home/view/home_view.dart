@@ -47,7 +47,6 @@ class HomeView extends StatelessWidget {
                         XSearchField(
                           value: state.searchText,
                           onChanged: (value) => bloc.onChangedText(value),
-                          onSearch: () => bloc.onSearchCities(),
                           hinText:
                               "search which city you want to know its weather",
                         ),

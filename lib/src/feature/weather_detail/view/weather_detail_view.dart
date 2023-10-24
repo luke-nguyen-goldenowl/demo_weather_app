@@ -67,13 +67,43 @@ class WeatherDetailView extends StatelessWidget {
                               ),
                               SizedBox(
                                   height: 250,
-                                  child: PageView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount:
-                                        state.weather.listDay?.length ?? 0,
-                                    itemBuilder: (context, index) {
-                                      return _dailyItem(state.weather, index);
-                                    },
+                                  child: Stack(
+                                    children: [
+                                      PageView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount:
+                                            state.weather.listDay?.length ?? 0,
+                                        onPageChanged: (value) => context
+                                            .read<WeatherDetailBloc>()
+                                            .onPageChanged(value),
+                                        itemBuilder: (context, index) {
+                                          return _dailyItem(
+                                              state.weather, index);
+                                        },
+                                      ),
+                                      if (state.currentPage > 0)
+                                        Container(
+                                          padding:
+                                              const EdgeInsets.only(left: 5),
+                                          alignment: Alignment.centerLeft,
+                                          child: Icon(
+                                            Icons.arrow_back_ios,
+                                            color: Colors.purple.shade100,
+                                          ),
+                                        ),
+                                      if (state.currentPage <
+                                          (state.weather.listDay?.length ?? 0) -
+                                              1)
+                                        Container(
+                                          padding:
+                                              const EdgeInsets.only(left: 5),
+                                          alignment: Alignment.centerRight,
+                                          child: Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: Colors.purple.shade100,
+                                          ),
+                                        ),
+                                    ],
                                   )),
                             ],
                           )));
@@ -83,7 +113,7 @@ class WeatherDetailView extends StatelessWidget {
 
   Widget _dailyItem(NWeather weather, int index) {
     return Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             gradient: LinearGradient(
@@ -170,7 +200,7 @@ class WeatherDetailView extends StatelessWidget {
   Widget _rain(double? value) {
     return _weatherItem(
       label: "Rain: ",
-      value: "$value} mm",
+      value: "$value mm",
       iconData: Icons.water_drop,
       iconColor: Colors.blue,
     );
